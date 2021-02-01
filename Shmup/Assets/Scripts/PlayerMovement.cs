@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rigidbody;
     private Vector3 moveDir;
+    private bool isDashButtonDown;
 
     private void Awake()
     {
@@ -37,10 +38,22 @@ public class PlayerMovement : MonoBehaviour
         }
 
         moveDir = new Vector3(moveX, moveY).normalized;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isDashButtonDown = true;
+        }
     }
 
     private void FixedUpdate()
     {
         rigidbody.velocity = moveDir * MOVE_SPEED;
+
+        if (isDashButtonDown)
+        {
+            float dashAmount = 10f;
+            rigidbody.MovePosition(transform.position + moveDir * dashAmount);
+            isDashButtonDown = false;
+        }
     }
 }
