@@ -5,6 +5,7 @@ using UnityEngine;
 public class BackgroundGenerator : MonoBehaviour
 {
     public GameObject backgroundTilePrefab;
+    public GameObject[] backgroundTilePrefabArray;
     List<GameObject> generatedBackgroundTiles;
     public float scrollSpeed;
     public float scrollAmount;
@@ -54,7 +55,9 @@ public class BackgroundGenerator : MonoBehaviour
                     generatedBackgroundTiles.RemoveAt(0);
                     //Generates a random color. Replace with "has point amount" or some other flag as a bool, and have it generate from another Tile pool
                     Color colorRand = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
-                    GameObject newTile = Instantiate(backgroundTilePrefab, Vector3.zero, Quaternion.identity);
+                    //Eample of random tiles from an array
+                    GameObject newTile = Instantiate(backgroundTilePrefabArray[Random.Range(0,backgroundTilePrefabArray.Length)], Vector3.zero, Quaternion.identity);
+                    //GameObject newTile = Instantiate(backgroundTilePrefab, Vector3.zero, Quaternion.identity);
                     newTile.GetComponent<Renderer>().material.color = colorRand;
                     float newTileHeight = Camera.main.orthographicSize * 2;
                     float newTileWidth = newTileHeight * Screen.width / Screen.height;
