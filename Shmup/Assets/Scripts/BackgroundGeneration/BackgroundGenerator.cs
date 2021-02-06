@@ -6,7 +6,10 @@ public class BackgroundGenerator : MonoBehaviour
 {
     public GameObject backgroundTilePrefab;
     public GameObject[] backgroundTilePrefabArray;
+    public GameObject[] backgroundTilePrefabArrayRed;
+    public GameObject[] backgroundTilePrefabArrayBlue;
     List<GameObject> generatedBackgroundTiles;
+    public int tilePoolIndex;
     public float scrollSpeed;
     public float scrollAmount;
     // Start is called before the first frame update
@@ -38,6 +41,8 @@ public class BackgroundGenerator : MonoBehaviour
 
     IEnumerator ScrollBackground(float _scrollspeed, float _scrollamount)
     {
+        GameObject newTile = null;
+        Color colorRand = Vector4.zero;
         bool newTileExists = false;
 
         while (true)
@@ -53,10 +58,27 @@ public class BackgroundGenerator : MonoBehaviour
                 {
                     Destroy(generatedBackgroundTiles[0]);
                     generatedBackgroundTiles.RemoveAt(0);
-                    //Generates a random color. Replace with "has point amount" or some other flag as a bool, and have it generate from another Tile pool
-                    Color colorRand = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
-                    //Eample of random tiles from an array
-                    GameObject newTile = Instantiate(backgroundTilePrefabArray[Random.Range(0,backgroundTilePrefabArray.Length)], Vector3.zero, Quaternion.identity);
+                    switch (tilePoolIndex)
+                    {
+                        case 0:
+                            //Eample of random tiles from an array
+                            newTile = Instantiate(backgroundTilePrefabArray[Random.Range(0, backgroundTilePrefabArray.Length)], Vector3.zero, Quaternion.identity);
+                            //Generates a random color. Replace with "has point amount" or some other flag as a bool, and have it generate from another Tile pool
+                            colorRand = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
+                            break;
+                        case 1:
+                            newTile = Instantiate(backgroundTilePrefabArrayBlue[Random.Range(0, backgroundTilePrefabArray.Length)], Vector3.zero, Quaternion.identity);
+                            //Generates a random color. Replace with "has point amount" or some other flag as a bool, and have it generate from another Tile pool
+                            colorRand = new Color(Random.Range(0f, 0f), Random.Range(0f, 0f), Random.Range(0f, 1f), 1);
+                            break;
+                        case 2:
+                            newTile = Instantiate(backgroundTilePrefabArrayRed[Random.Range(0, backgroundTilePrefabArray.Length)], Vector3.zero, Quaternion.identity);
+                            //Generates a random color. Replace with "has point amount" or some other flag as a bool, and have it generate from another Tile pool
+                            colorRand = new Color(Random.Range(0f, 1f), Random.Range(0f, 0f), Random.Range(0f, 0f), 1);
+                            break;
+                    }
+
+
                     //GameObject newTile = Instantiate(backgroundTilePrefab, Vector3.zero, Quaternion.identity);
                     newTile.GetComponent<Renderer>().material.color = colorRand;
                     float newTileHeight = Camera.main.orthographicSize * 2;
