@@ -52,8 +52,10 @@ public class BackgroundGenerator : MonoBehaviour
                 {
                     Destroy(generatedBackgroundTiles[0]);
                     generatedBackgroundTiles.RemoveAt(0);
-
+                    //Generates a random color. Replace with "has point amount" or some other flag as a bool, and have it generate from another Tile pool
+                    Color colorRand = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
                     GameObject newTile = Instantiate(backgroundTilePrefab, Vector3.zero, Quaternion.identity);
+                    newTile.GetComponent<Renderer>().material.color = colorRand;
                     float newTileHeight = Camera.main.orthographicSize * 2;
                     float newTileWidth = newTileHeight * Screen.width / Screen.height;
                     newTile.transform.localScale = new Vector3(newTileWidth, newTileHeight, 1);
