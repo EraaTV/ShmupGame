@@ -12,6 +12,7 @@ public class BackgroundGenerator : MonoBehaviour
     public int tilePoolIndex;
     public float scrollSpeed;
     public float scrollAmount;
+    public GameObject playerCube;
     public Texture[] backgroundTexturesArray;
     // Start is called before the first frame update
     void Start()
@@ -48,6 +49,13 @@ public class BackgroundGenerator : MonoBehaviour
 
         while (true)
         {
+            if(playerCube.transform.position.x > 0)
+            {
+                tilePoolIndex = 1;
+            } else if (playerCube.transform.position.x < 0)
+            {
+                tilePoolIndex = 2;
+            }
             for (int i = 0; i < generatedBackgroundTiles.Count; i++)
             {
                 if (generatedBackgroundTiles.Count > 2)
@@ -85,7 +93,7 @@ public class BackgroundGenerator : MonoBehaviour
                     //GameObject newTile = Instantiate(backgroundTilePrefab, Vector3.zero, Quaternion.identity);
                     newTile.GetComponent<Renderer>().material.color = colorRand;
                     //Apply texture to new tile clone, use the same ID as the generated background tile, this is an alternative to needing a prefab for every tile.
-                    newTile.GetComponent<Renderer>().material.mainTexture = backgroundTexturesArray[tileIndexRand];
+                    //newTile.GetComponent<Renderer>().material.mainTexture = backgroundTexturesArray[tileIndexRand];
                     float newTileHeight = Camera.main.orthographicSize * 2;
                     float newTileWidth = newTileHeight * Screen.width / Screen.height;
                     newTile.transform.localScale = new Vector3(newTileWidth, newTileHeight, 1);
