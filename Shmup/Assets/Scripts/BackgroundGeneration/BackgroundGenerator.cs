@@ -14,6 +14,7 @@ public class BackgroundGenerator : MonoBehaviour
     public float scrollAmount;
     public GameObject playerCube;
     public Texture[] backgroundTexturesArray;
+    public bool changeTilePool;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,15 +47,25 @@ public class BackgroundGenerator : MonoBehaviour
         GameObject newTile = null;
         Color colorRand = Vector4.zero;
         bool newTileExists = false;
+        float changePoolTimer = 0;
 
         while (true)
         {
-            if(playerCube.transform.position.x > 0)
+            changePoolTimer += Time.deltaTime;
+            if (changePoolTimer > 5)
+            {
+                changeTilePool = true;
+                changePoolTimer = 0;
+            }
+            if(playerCube.transform.position.x > 0 && changeTilePool)
             {
                 tilePoolIndex = 1;
-            } else if (playerCube.transform.position.x < 0)
+                changeTilePool = false;
+            } else if (playerCube.transform.position.x < 0 && changeTilePool)
             {
                 tilePoolIndex = 2;
+                changeTilePool = false;
+
             }
             for (int i = 0; i < generatedBackgroundTiles.Count; i++)
             {
