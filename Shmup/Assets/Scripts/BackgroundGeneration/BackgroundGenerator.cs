@@ -12,6 +12,7 @@ public class BackgroundGenerator : MonoBehaviour
     public int tilePoolIndex;
     public float scrollSpeed;
     public float scrollAmount;
+    public Texture[] backgroundTexturesArray;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,11 +59,13 @@ public class BackgroundGenerator : MonoBehaviour
                 {
                     Destroy(generatedBackgroundTiles[0]);
                     generatedBackgroundTiles.RemoveAt(0);
+                    int tileIndexRand = 0;
                     switch (tilePoolIndex)
                     {
                         case 0:
                             //Eample of random tiles from an array
-                            newTile = Instantiate(backgroundTilePrefabArray[Random.Range(0, backgroundTilePrefabArray.Length)], Vector3.zero, Quaternion.identity);
+                            tileIndexRand = Random.Range(0, backgroundTilePrefabArray.Length);
+                            newTile = Instantiate(backgroundTilePrefabArray[tileIndexRand], Vector3.zero, Quaternion.identity);
                             //Generates a random color. Replace with "has point amount" or some other flag as a bool, and have it generate from another Tile pool
                             colorRand = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
                             break;
@@ -81,6 +84,8 @@ public class BackgroundGenerator : MonoBehaviour
 
                     //GameObject newTile = Instantiate(backgroundTilePrefab, Vector3.zero, Quaternion.identity);
                     newTile.GetComponent<Renderer>().material.color = colorRand;
+                    //Apply texture to new tile clone, use the same ID as the generated background tile, this is an alternative to needing a prefab for every tile.
+                    newTile.GetComponent<Renderer>().material.mainTexture = backgroundTexturesArray[tileIndexRand];
                     float newTileHeight = Camera.main.orthographicSize * 2;
                     float newTileWidth = newTileHeight * Screen.width / Screen.height;
                     newTile.transform.localScale = new Vector3(newTileWidth, newTileHeight, 1);
