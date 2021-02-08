@@ -13,6 +13,9 @@ public class Hi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Time.time > 5)
+        {
+            print("It has been 5 seconds!");
+        }
     }
 }
