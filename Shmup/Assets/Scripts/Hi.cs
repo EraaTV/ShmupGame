@@ -5,8 +5,13 @@ using UnityEngine;
 public class Hi : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         print("Hello world!");
+    }
+
+    private void Update()
+    {
+        
     }
 }
