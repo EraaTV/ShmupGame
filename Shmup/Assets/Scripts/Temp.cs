@@ -1,8 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hi : MonoBehaviour
+public class Temp : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,9 +13,6 @@ public class Hi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > 5)
-        {
-            print("It has been 5 seconds!");
-        }
+        
     }
 }
