@@ -6,17 +6,24 @@ using UnityEngine;
 // Will most likely be replaced with more advanced behaviour later on
 public class EnemyPathMovement : MonoBehaviour
 {
+    // Other components
+    EnemyShooting ShootScript;
+
+    // Movement variables
     [SerializeField]
     GameObject[] PathNodes = new GameObject[0];
     [SerializeField]
     int nodePos = -1;
     [SerializeField]
-    Vector3 targetLoc;
+    Vector3 TargetLoc;
 
     [SerializeField]
     float enterSpeed = 4f, moveSpeed = 2f;
     [SerializeField]
     PathMode CurrentPath = PathMode.Patrol;
+
+    // Shooting variables
+    float firingRate = 1f;
 
     // Movement options for different path types
     // These modes can safely be switched en route between nodes or even after finishing a path
@@ -28,38 +35,46 @@ public class EnemyPathMovement : MonoBehaviour
 
     private void Awake()
     {
+        if (GetComponent<EnemyShooting>())
+        {
+            ShootScript = GetComponent<EnemyShooting>();
+        }
+
         if (PathNodes.Length > 0)
         {
-            targetLoc = PathNodes[0].transform.position;
+            TargetLoc = PathNodes[0].transform.position;
         }
         else
         {
-            targetLoc = transform.position;
+            TargetLoc = transform.position;
         }
+
+        // Regularly shoot (if bullet object assigned)
+        ShootScript.InvokeRepeating("Fire", firingRate, firingRate);
     }
 
     void FixedUpdate()
     {
         //Linear, node-to-node movement
-        if (transform.position != targetLoc)
+        if (transform.position != TargetLoc)
         {
             // Update target position in case node moves
             if (nodePos < PathNodes.Length && nodePos > -1)
             {
-                targetLoc = PathNodes[nodePos].transform.position;
+                TargetLoc = PathNodes[nodePos].transform.position;
             }
 
             // Entry speed is used to travel to the first node
             if (nodePos < 0)
             {
                 // Entry speed (moving to first node) is independent of the unit's general move speed
-                transform.position = Vector3.MoveTowards(transform.position, targetLoc, enterSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, TargetLoc, enterSpeed * Time.deltaTime);
             }
             // Normal speed is used to travel between nodes thereafter
             else
             {
                 // Move towards target node
-                transform.position = Vector3.MoveTowards(transform.position, targetLoc, moveSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, TargetLoc, moveSpeed * Time.deltaTime);
             }
         }
         // If node is reached, move to next node in list
@@ -69,13 +84,13 @@ public class EnemyPathMovement : MonoBehaviour
             {
                 // Queue next node as target
                 nodePos++;
-                targetLoc = PathNodes[nodePos].transform.position;
+                TargetLoc = PathNodes[nodePos].transform.position;
             }
             else if (nodePos == PathNodes.Length - 1 && CurrentPath == PathMode.Patrol)
             {
                 // Reset to first node
                 nodePos = 0;
-                targetLoc = PathNodes[nodePos].transform.position;
+                TargetLoc = PathNodes[nodePos].transform.position;
             }
         }
     }
