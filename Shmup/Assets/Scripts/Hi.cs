@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +12,9 @@ public class Hi : MonoBehaviour
 
     private void Update()
     {
-        
+        if (Time.time > 5)
+        {
+            print("It has been 5 seconds!");
+        }
     }
 }
