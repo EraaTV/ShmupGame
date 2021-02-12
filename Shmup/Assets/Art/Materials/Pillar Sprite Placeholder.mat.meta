@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 34b84e789a3c9294b95811e804b47e04
+=======
+guid: 16495d92c6fd5504abe1c52373fc1e16
+>>>>>>> origin/ImplementedArtAdi
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
