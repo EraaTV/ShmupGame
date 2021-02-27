@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class TempPlayer : MonoBehaviour
 {
-    private const float MOVE_SPEED = 60f;
+    private const float MOVE_SPEED = 30f;
 
-    private Rigidbody rigidbody;
+    private Rigidbody2D rigidbody;
     private Vector3 moveDir;
     private bool isDashButtonDown;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -29,7 +29,8 @@ public class PlayerMovement : MonoBehaviour
         {
             moveY = -1f;
         }
-        if (Input.GetKey(KeyCode.A)){
+        if (Input.GetKey(KeyCode.A))
+        {
             moveX = -1f;
         }
         if (Input.GetKey(KeyCode.D))

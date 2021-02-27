@@ -23,12 +23,15 @@ public class BackgroundGenerator : MonoBehaviour
         GameObject initialTile = Instantiate(backgroundTilePrefab, Vector3.zero, Quaternion.identity);
         float initialTileHeight = Camera.main.orthographicSize * 2;
         float initialTileWidth = initialTileHeight * Screen.width / Screen.height;
+        initialTile.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
         initialTile.transform.localScale =new Vector3(initialTileWidth, initialTileHeight, 1);
 
         GameObject initialTile2 = Instantiate(backgroundTilePrefab, Vector3.zero, Quaternion.identity);
         float initialTileHeight2 = Camera.main.orthographicSize * 2;
         float initialTileWidth2 = initialTileHeight * Screen.width / Screen.height;
         initialTile2.transform.localScale =new Vector3(initialTileWidth2, initialTileHeight2, 1);
+        initialTile2.GetComponent<Renderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
+
         initialTile2.transform.localPosition = new Vector3(0, 20, 0);
 
         generatedBackgroundTiles.Add(initialTile);

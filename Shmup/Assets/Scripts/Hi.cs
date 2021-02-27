@@ -12,9 +12,14 @@ public class Hi : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time > 5)
+        if (Time.time > 15)
         {
             print("It has been 5 seconds!");
+        }
+
+        if (Time.time > 10)
+        {
+            print("It has been 10 seconds!");
         }
     }
 }
