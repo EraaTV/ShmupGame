@@ -6,7 +6,8 @@ public class EnemyWithSO : MonoBehaviour
 {
     public EnemySO EnemyType;
 
-    public GameObject BulletType;
+    public GameObject Bullet;
+    public BulletSO BulletType;
 
     [SerializeField]
     GameObject FiringNode;
@@ -35,7 +36,7 @@ public class EnemyWithSO : MonoBehaviour
         Patrol
     }
 
-    private void Awake()
+    private void Start()
     {
         if (EnemyType)
         {
@@ -101,10 +102,12 @@ public class EnemyWithSO : MonoBehaviour
 
     public void Fire()
     {
-        if (BulletType != null)
+        if (Bullet != null && BulletType != null)
         {
             // Instantiate bullet at firing node
-            Instantiate(BulletType, FiringNode.transform.position, transform.rotation);
+            GameObject TempBullet = Instantiate(Bullet, FiringNode.transform.position, transform.rotation);
+            // Assign current enemy bullet type to instantiated bullet
+            TempBullet.GetComponent<BulletWithSO>().BulletType = BulletType;
         }
     }
 }

@@ -127,9 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1883cc66cd3728c4b957f870e0bb9784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyType: {fileID: 0}
-  BulletType: {fileID: 6952760032360866262, guid: d0742ec4a6f617d46bb9d33290fdbce0,
-    type: 3}
+  EnemyType: {fileID: 11400000, guid: 864393cbba2b8914dbd5f42907cbb111, type: 2}
+  Bullet: {fileID: 6952760032360866262, guid: d429bdbcb1a312d4fa08da196eade285, type: 3}
+  BulletType: {fileID: 11400000, guid: 1a520f85aea0b2d418c7e850ece874be, type: 2}
   FiringNode: {fileID: 8966359440043671193}
   PathNodes: []
   nodePos: -1

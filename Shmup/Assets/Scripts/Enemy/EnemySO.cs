@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Scriptable object for instantiating enemy base stats into spawned prefabs
+// Scriptable object for creating enemy base stat presets
 [CreateAssetMenu(fileName = "EnemyType", menuName = "ScriptableObjects/EnemyType", order = 1)]
 public class EnemySO : ScriptableObject
 {
