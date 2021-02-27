@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 1ffad422906ee034c95758f6e6379164
   - enabled: 1
+    path: Assets/Scenes/Level01.unity
+    guid: d7ad7aa7edad01a4284c5b3f9c265eea
+  - enabled: 1
     path: Assets/Scenes/PlayerEnemyTest.unity
     guid: 1718dcb0d5b44f44a95ce6feaa23e247
   - enabled: 1

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private const float MOVE_SPEED = 60f;
+    [SerializeField]
+    private float MOVE_SPEED = 60f;
 
     private Rigidbody rigidbody;
     private Vector3 moveDir;
