@@ -15,4 +15,4 @@ MonoBehaviour:
   bltSpd: 8
   bltAccel: 0
   bltDmg: 1
-  bltLifetime: 1
+  bltLifetime: 2

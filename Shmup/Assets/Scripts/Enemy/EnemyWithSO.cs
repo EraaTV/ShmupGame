@@ -76,42 +76,46 @@ public class EnemyWithSO : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Linear, node-to-node movement
-        if (transform.position != TargetLoc)
+        // In case no nodes are assigned
+        if (PathNodes.Length > 0)
         {
-            // Update target position in case node moves
-            if (nodePos < PathNodes.Length && nodePos > -1)
+            //Linear, node-to-node movement
+            if (transform.position != TargetLoc)
             {
-                TargetLoc = PathNodes[nodePos].transform.position;
-            }
+                // Update target position in case node moves
+                if (nodePos < PathNodes.Length && nodePos > -1)
+                {
+                    TargetLoc = PathNodes[nodePos].transform.position;
+                }
 
-            // Entry speed is used to travel to the first node
-            if (nodePos < 0)
-            {
-                // Entry speed (moving to first node) is independent of the unit's general move speed
-                transform.position = Vector3.MoveTowards(transform.position, TargetLoc, enterSpeed * Time.deltaTime);
+                // Entry speed is used to travel to the first node
+                if (nodePos < 0)
+                {
+                    // Entry speed (moving to first node) is independent of the unit's general move speed
+                    transform.position = Vector3.MoveTowards(transform.position, TargetLoc, enterSpeed * Time.deltaTime);
+                }
+                // Normal speed is used to travel between nodes thereafter
+                else
+                {
+                    // Move towards target node
+                    transform.position = Vector3.MoveTowards(transform.position, TargetLoc, moveSpeed * Time.deltaTime);
+                }
             }
-            // Normal speed is used to travel between nodes thereafter
+            // If node is reached, move to next node in list
             else
             {
-                // Move towards target node
-                transform.position = Vector3.MoveTowards(transform.position, TargetLoc, moveSpeed * Time.deltaTime);
-            }
-        }
-        // If node is reached, move to next node in list
-        else
-        {
-            if (nodePos < PathNodes.Length - 1)
-            {
-                // Queue next node as target
-                nodePos++;
-                TargetLoc = PathNodes[nodePos].transform.position;
-            }
-            else if (nodePos == PathNodes.Length - 1 && CurrentPath == PathMode.Patrol)
-            {
-                // Reset to first node
-                nodePos = 0;
-                TargetLoc = PathNodes[nodePos].transform.position;
+                if (nodePos < PathNodes.Length - 1)
+                {
+                    // Queue next node as target
+                    nodePos++;
+                    TargetLoc = PathNodes[nodePos].transform.position;
+                }
+                else if (nodePos == PathNodes.Length - 1 && CurrentPath == PathMode.Patrol)
+                {
+                    // Reset to first node
+                    nodePos = 0;
+                    TargetLoc = PathNodes[nodePos].transform.position;
+                }
             }
         }
     }
