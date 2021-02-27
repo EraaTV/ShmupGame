@@ -39,4 +39,19 @@ public class BulletWithSO : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Temporary damage applier code
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerShoot>().currentHp -= bltDmg;
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            collision.gameObject.GetComponent<EnemyWithSO>().currentHp -= bltDmg;
+        }
+
+        Destroy(gameObject);
+    }
 }

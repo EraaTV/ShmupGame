@@ -8,5 +8,5 @@ public class EnemySO : ScriptableObject
 {
     public string enemyName;
 
-    public float enemyMaxHp = 3, fireRate = 1, enterSpeed = 1, moveSpeed = 1;
+    public float maxHp = 3, fireRate = 1, enterSpeed = 1, moveSpeed = 1;
 }
