@@ -6,10 +6,14 @@ public class EnemyWithSO : MonoBehaviour
 {
     public EnemySO EnemyType;
 
-    public GameObject BulletType;
+    public GameObject Bullet;
+    public BulletSO BulletType;
 
     [SerializeField]
     GameObject FiringNode;
+
+    // Health values
+    public float currentHp, maxHp = 3;
 
     // Movement variables
     [SerializeField]
@@ -35,14 +39,18 @@ public class EnemyWithSO : MonoBehaviour
         Patrol
     }
 
-    private void Awake()
+    private void Start()
     {
         if (EnemyType)
         {
             enterSpeed = EnemyType.enterSpeed;
             moveSpeed = EnemyType.moveSpeed;
             fireRate = EnemyType.fireRate;
+            maxHp = EnemyType.maxHp;
         }
+
+        // Set health value
+        currentHp = maxHp;
 
         if (PathNodes.Length > 0)
         {
@@ -55,6 +63,15 @@ public class EnemyWithSO : MonoBehaviour
 
         // Regularly shoot (if bullet object assigned)
         InvokeRepeating("Fire", fireRate, fireRate);
+    }
+
+    void Update()
+    {
+        if (currentHp <= 0)
+        {
+            // Enemy death at 0 hp
+            Destroy(gameObject);
+        }
     }
 
     void FixedUpdate()
@@ -101,10 +118,12 @@ public class EnemyWithSO : MonoBehaviour
 
     public void Fire()
     {
-        if (BulletType != null)
+        if (Bullet != null && BulletType != null)
         {
             // Instantiate bullet at firing node
-            Instantiate(BulletType, FiringNode.transform.position, transform.rotation);
+            GameObject TempBullet = Instantiate(Bullet, FiringNode.transform.position, FiringNode.transform.rotation);
+            // Assign current enemy bullet type to instantiated bullet
+            TempBullet.GetComponent<BulletWithSO>().BulletType = BulletType;
         }
     }
 }
