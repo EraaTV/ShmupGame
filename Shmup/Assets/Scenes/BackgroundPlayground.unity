@@ -253,6 +253,10 @@ MonoBehaviour:
   tilePoolIndex: 0
   scrollSpeed: 0.1
   scrollAmount: 0.1
+  playerCube: {fileID: 0}
+  backgroundTexturesArray: []
+  changeTilePool: 0
+  tileCountForChange: 0
 --- !u!4 &353689332
 Transform:
   m_ObjectHideFlags: 0
@@ -261,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353689330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.68245065, y: 1.3921309, z: -0.7644366}
+  m_LocalPosition: {x: 93.4, y: 1.3921309, z: -0.7644366}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

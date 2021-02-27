@@ -5,17 +5,21 @@ using UnityEngine;
 public class Hi : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        print("Hello world!");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Time.time > 5)
+        if (Time.time > 15)
         {
             print("It has been 5 seconds!");
+        }
+
+        if (Time.time > 10)
+        {
+            print("It has been 10 seconds!");
         }
     }
 }
