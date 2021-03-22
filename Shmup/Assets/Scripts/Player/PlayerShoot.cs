@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class PlayerShoot : MonoBehaviour
     {
         if (currentHp <= 0)
         {
+            // Analytics event
+            AnalyticsResult temp = Analytics.CustomEvent("PlayerDies" + SceneManager.GetActiveScene());
+            Debug.Log("PlayerDies event status: " + temp);
+            
             // Load main menu on death
             SceneManager.LoadScene("MainMenu");
         }
