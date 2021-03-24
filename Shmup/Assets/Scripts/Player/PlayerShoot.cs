@@ -26,8 +26,12 @@ public class PlayerShoot : MonoBehaviour
         if (currentHp <= 0)
         {
             // Analytics event
-            AnalyticsResult temp = Analytics.CustomEvent("PlayerDies" + SceneManager.GetActiveScene());
-            Debug.Log("PlayerDies event status: " + temp);
+            AnalyticsResult temp = Analytics.CustomEvent("player_died", new Dictionary<string, object>
+            {
+                { "scene_name", SceneManager.GetActiveScene().name },
+                { "time_elapsed", Time.timeSinceLevelLoad }
+            });
+            Debug.Log("player_died event status: " + temp);
             
             // Load main menu on death
             SceneManager.LoadScene("MainMenu");
