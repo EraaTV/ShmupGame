@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class BackgroundGenerator : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class BackgroundGenerator : MonoBehaviour
     public Texture[] backgroundTexturesArray;
     public bool changeTilePool;
     public int tileCountForChange;
+    public bool useTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,19 +59,43 @@ public class BackgroundGenerator : MonoBehaviour
         while (true)
         {
             changePoolTimer += Time.deltaTime;
-            if (changePoolTimer > 5 || tileCount>tileCountForChange)
+            if (useTimer)
             {
-                changeTilePool = true;
-                changePoolTimer = 0;
+                if (changePoolTimer > 5)
+                {
+                    changeTilePool = true;
+                    changePoolTimer = 0;
+                    print("changeTilePool Timer");
+                }
+            } else
+            {
+                if (tileCount > tileCountForChange)
+                {
+                    changeTilePool = true;                   
+                    tileCount = 0;
+                    print("changeTilePool Count");
+                }
             }
+            
             if(playerCube.transform.position.x > 0 && changeTilePool)
             {
                 tilePoolIndex = 1;
                 changeTilePool = false;
+                AnalyticsResult temp = Analytics.CustomEvent("right_path_taken", new Dictionary<string, object>{
+                    {"scene_name", SceneManager.GetActiveScene().name },
+                    {"poolIndex", tilePoolIndex } }
+                    
+                    );
+                print("right_path_taken status: "+temp);
             } else if (playerCube.transform.position.x < 0 && changeTilePool)
             {
                 tilePoolIndex = 2;
                 changeTilePool = false;
+                AnalyticsResult temp = Analytics.CustomEvent("left_path_taken", new Dictionary<string, object>{
+                    {"scene_name", SceneManager.GetActiveScene().name },
+                    {"currentHP", playerCube.GetComponent<PlayerShoot>().currentHp }
+                });
+                print("left_path_taken status: "+temp);
 
             }
             for (int i = 0; i < generatedBackgroundTiles.Count; i++)
@@ -114,9 +141,10 @@ public class BackgroundGenerator : MonoBehaviour
                     newTile.transform.localScale = new Vector3(newTileWidth, newTileHeight, 1);
                     newTile.transform.localPosition = new Vector3(0, 20, 0);
                     generatedBackgroundTiles.Add(newTile);
+                    tileCount++;
+
                 }
             }
-            tileCount++;
             yield return new WaitForSeconds(_scrollspeed);
         }
     }
