@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class MainMenuManager : MonoBehaviour
 
     public void QuitGame()
     {
+        Analytics.CustomEvent("TimePlayed", new Dictionary<string, object> {
+            {
+                "Seconds",Time.time
+            }
+        }); 
         Application.Quit();
     }
 }
