@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class BackgroundGenerator : MonoBehaviour
 {
@@ -80,13 +81,20 @@ public class BackgroundGenerator : MonoBehaviour
             {
                 tilePoolIndex = 1;
                 changeTilePool = false;
-                AnalyticsResult temp = Analytics.CustomEvent("right_path_taken");
+                AnalyticsResult temp = Analytics.CustomEvent("right_path_taken", new Dictionary<string, object>{
+                    {"scene_name", SceneManager.GetActiveScene().name },
+                    {"poolIndex", tilePoolIndex } }
+                    
+                    );
                 print("right_path_taken status: "+temp);
             } else if (playerCube.transform.position.x < 0 && changeTilePool)
             {
                 tilePoolIndex = 2;
                 changeTilePool = false;
-                AnalyticsResult temp = Analytics.CustomEvent("left_path_taken");
+                AnalyticsResult temp = Analytics.CustomEvent("left_path_taken", new Dictionary<string, object>{
+                    {"scene_name", SceneManager.GetActiveScene().name },
+                    {"currentHP", playerCube.GetComponent<PlayerShoot>().currentHp }
+                });
                 print("left_path_taken status: "+temp);
 
             }
