@@ -139,6 +139,8 @@ MonoBehaviour:
   enterSpeed: 4
   moveSpeed: 2
   CurrentPath: 1
+  analyticsManager: {fileID: 8556543459740132661, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+    type: 3}
 --- !u!58 &8072545378391449109
 CircleCollider2D:
   m_ObjectHideFlags: 0
