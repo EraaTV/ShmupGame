@@ -39,6 +39,9 @@ public class EnemyWithSO : MonoBehaviour
         Patrol
     }
 
+    // Access Analytics Manager in Level1
+    public GameObject analyticsManager;
+
     private void Start()
     {
         if (EnemyType)
@@ -69,6 +72,8 @@ public class EnemyWithSO : MonoBehaviour
     {
         if (currentHp <= 0)
         {
+            analyticsManager.GetComponent<Analytics_EnemyDefeated>().enemyDefeatedNum += 1;
+
             // Enemy death at 0 hp
             Destroy(gameObject);
         }
