@@ -658,10 +658,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 673237bc-77c0-48e0-84a3-82231b8c71f3
+  cloudProjectId: 356f21ca-386f-4cea-8857-07ee61b809f1
   framebufferDepthMemorylessMode: 0
   projectName: Shmup
-  organizationId: methodology
+  organizationId: hindude96
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

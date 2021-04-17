@@ -413,6 +413,7 @@ MonoBehaviour:
   backgroundTexturesArray: []
   changeTilePool: 0
   tileCountForChange: 0
+  useTimer: 0
 --- !u!4 &353689332
 Transform:
   m_ObjectHideFlags: 0
@@ -1396,3 +1397,77 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20, y: 1}
   m_EdgeRadius: 0
+--- !u!1001 &7783773639417693734
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3942485075017709479, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: time
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958525260040425505, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958525260040425505, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.7399998
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958525260040425505, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958525260040425505, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958525260040425505, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958525260040425505, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958525260040425505, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958525260040425505, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958525260040425505, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958525260040425505, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958525260040425505, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556543459740132661, guid: dd12b0748f2e2c746a53ebb3a97b3cc8,
+        type: 3}
+      propertyPath: m_Name
+      value: AnalyticsManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dd12b0748f2e2c746a53ebb3a97b3cc8, type: 3}

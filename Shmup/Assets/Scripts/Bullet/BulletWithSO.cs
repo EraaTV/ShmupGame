@@ -12,6 +12,7 @@ public class BulletWithSO : MonoBehaviour
     // Get component(s)
     Rigidbody2D rb;
 
+
     private void Start()
     {
         if (BulletType)
@@ -24,6 +25,7 @@ public class BulletWithSO : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         bltCreation = Time.fixedTime;
+
     }
 
     private void FixedUpdate()
