@@ -26,20 +26,6 @@ public class PlayerShoot : MonoBehaviour
     {
         Profiler.BeginSample("PlayerShoot_Update");
 
-        if (currentHp <= 0)
-        {
-            // Analytics event
-            AnalyticsResult temp = Analytics.CustomEvent("player_died", new Dictionary<string, object>
-            {
-                { "scene_name", SceneManager.GetActiveScene().name },
-                { "time_elapsed", Time.timeSinceLevelLoad }
-            });
-            Debug.Log("player_died event status: " + temp);
-            
-            // Load main menu on death
-            SceneManager.LoadScene("MainMenu");
-        }
-
         FireOnKeyPress();
 
         Profiler.EndSample();
@@ -57,6 +43,35 @@ public class PlayerShoot : MonoBehaviour
                 // Assign current enemy bullet type to instantiated bullet
                 TempBullet.GetComponent<BulletWithSO>().BulletType = BulletType;
             }
+        }
+    }
+
+    void TakeDamage(float damageTaken)
+    {
+        currentHp -= damageTaken;
+
+        // Check if dead
+        if (currentHp <= 0)
+        {
+            // Analytics event
+            AnalyticsResult temp = Analytics.CustomEvent("player_died", new Dictionary<string, object>
+            {
+                { "scene_name", SceneManager.GetActiveScene().name },
+                { "time_elapsed", Time.timeSinceLevelLoad }
+            });
+            Debug.Log("player_died event status: " + temp);
+
+            // Load main menu on death
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Bullet collision reaction
+        if (collision.gameObject.layer == 8)
+        {
+            TakeDamage(collision.gameObject.GetComponent<BulletWithSO>().bltDmg);
         }
     }
 }
