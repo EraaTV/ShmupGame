@@ -65,7 +65,7 @@ public class BackgroundGenerator : MonoBehaviour
                 {
                     changeTilePool = true;
                     changePoolTimer = 0;
-                    print("changeTilePool Timer");
+                    
                 }
             } else
             {
@@ -73,7 +73,7 @@ public class BackgroundGenerator : MonoBehaviour
                 {
                     changeTilePool = true;                   
                     tileCount = 0;
-                    print("changeTilePool Count");
+                    
                 }
             }
             
@@ -86,7 +86,7 @@ public class BackgroundGenerator : MonoBehaviour
                     {"poolIndex", tilePoolIndex } }
                     
                     );
-                print("right_path_taken status: "+temp);
+                
             } else if (playerCube.transform.position.x < 0 && changeTilePool)
             {
                 tilePoolIndex = 2;
@@ -95,7 +95,7 @@ public class BackgroundGenerator : MonoBehaviour
                     {"scene_name", SceneManager.GetActiveScene().name },
                     {"currentHP", playerCube.GetComponent<PlayerShoot>().currentHp }
                 });
-                print("left_path_taken status: "+temp);
+                
 
             }
             for (int i = 0; i < generatedBackgroundTiles.Count; i++)
