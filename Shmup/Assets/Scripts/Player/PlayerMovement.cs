@@ -11,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDir;
     private bool isDashButtonDown;
 
+    float moveX = 0f;
+    float moveY = 0f;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -18,10 +21,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        float moveX = 0f;
-        float moveY = 0f;
+        
 
-
+        //Get Directional Input
         if (Input.GetKey(KeyCode.W))
         {
             moveY = +1f;
@@ -38,8 +40,10 @@ public class PlayerMovement : MonoBehaviour
             moveX = +1f;
         }
 
+        //Direction of movement
         moveDir = new Vector3(moveX, moveY).normalized;
 
+        //Additional command to make the player dash
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isDashButtonDown = true;
@@ -48,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Move the player object in game
         rigidbody.velocity = moveDir * MOVE_SPEED;
 
         if (isDashButtonDown)
@@ -57,4 +62,6 @@ public class PlayerMovement : MonoBehaviour
             isDashButtonDown = false;
         }
     }
+
+
 }
