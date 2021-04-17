@@ -24,7 +24,7 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Profiler.BeginSample("PlayerShoot_Health");
+        Profiler.BeginSample("PlayerShoot_Update");
 
         if (currentHp <= 0)
         {
