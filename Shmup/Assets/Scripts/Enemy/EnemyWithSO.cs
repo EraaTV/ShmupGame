@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class EnemyWithSO : MonoBehaviour
 {
@@ -70,6 +71,8 @@ public class EnemyWithSO : MonoBehaviour
 
     void Update()
     {
+        Profiler.BeginSample("EnemyWithSO_Health");
+
         if (currentHp <= 0)
         {
             analyticsManager.GetComponent<Analytics_EnemyDefeated>().enemyDefeatedNum += 1;
@@ -77,6 +80,8 @@ public class EnemyWithSO : MonoBehaviour
             // Enemy death at 0 hp
             Destroy(gameObject);
         }
+
+        Profiler.EndSample();
     }
 
     void FixedUpdate()

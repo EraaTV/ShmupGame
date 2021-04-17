@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
+using UnityEngine.Profiling;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Profiler.BeginSample("PlayerShoot_Health");
+
         if (currentHp <= 0)
         {
             // Analytics event
@@ -38,6 +41,8 @@ public class PlayerShoot : MonoBehaviour
         }
 
         FireOnKeyPress();
+
+        Profiler.EndSample();
     }
 
     // Fire on left-mouse press

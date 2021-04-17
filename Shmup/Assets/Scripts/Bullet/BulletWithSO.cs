@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class BulletWithSO : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class BulletWithSO : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Profiler.BeginSample("BulletWithSO_FixedUpdate");
+
         // Move bullet by factor of bullet speed and bullet acceleration each frame
         rb.MovePosition((Vector3)rb.position + (transform.up * bltSpd) * Time.deltaTime);
 
@@ -40,6 +43,8 @@ public class BulletWithSO : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        Profiler.EndSample();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
