@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class EnemyWithSO : MonoBehaviour
 {
@@ -70,13 +71,7 @@ public class EnemyWithSO : MonoBehaviour
 
     void Update()
     {
-        if (currentHp <= 0)
-        {
-            analyticsManager.GetComponent<Analytics_EnemyDefeated>().enemyDefeatedNum += 1;
-
-            // Enemy death at 0 hp
-            Destroy(gameObject);
-        }
+        
     }
 
     void FixedUpdate()
@@ -133,6 +128,33 @@ public class EnemyWithSO : MonoBehaviour
             GameObject TempBullet = Instantiate(Bullet, FiringNode.transform.position, FiringNode.transform.rotation);
             // Assign current enemy bullet type to instantiated bullet
             TempBullet.GetComponent<BulletWithSO>().BulletType = BulletType;
+        }
+    }
+
+    void TakeDamage(float damageTaken)
+    {
+        Profiler.BeginSample("EnemyWithSO_Health");
+
+        currentHp -= damageTaken;
+
+        // Check if dead
+        if (currentHp <= 0)
+        {
+            analyticsManager.GetComponent<Analytics_EnemyDefeated>().enemyDefeatedNum += 1;
+
+            // Enemy death at 0 hp
+            Destroy(gameObject);
+        }
+
+        Profiler.EndSample();
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Bullet collision reaction
+        if (collision.gameObject.layer == 8)
+        {
+            TakeDamage(collision.gameObject.GetComponent<BulletWithSO>().bltDmg);
         }
     }
 }
