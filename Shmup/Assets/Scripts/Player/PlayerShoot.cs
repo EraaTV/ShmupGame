@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
+using UnityEngine.Profiling;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -23,21 +24,11 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentHp <= 0)
-        {
-            // Analytics event
-            AnalyticsResult temp = Analytics.CustomEvent("player_died", new Dictionary<string, object>
-            {
-                { "scene_name", SceneManager.GetActiveScene().name },
-                { "time_elapsed", Time.timeSinceLevelLoad }
-            });
-            Debug.Log("player_died event status: " + temp);
-            
-            // Load main menu on death
-            SceneManager.LoadScene("MainMenu");
-        }
+        Profiler.BeginSample("PlayerShoot_Update");
 
         FireOnKeyPress();
+
+        Profiler.EndSample();
     }
 
     // Fire on left-mouse press
@@ -52,6 +43,35 @@ public class PlayerShoot : MonoBehaviour
                 // Assign current enemy bullet type to instantiated bullet
                 TempBullet.GetComponent<BulletWithSO>().BulletType = BulletType;
             }
+        }
+    }
+
+    void TakeDamage(float damageTaken)
+    {
+        currentHp -= damageTaken;
+
+        // Check if dead
+        if (currentHp <= 0)
+        {
+            // Analytics event
+            AnalyticsResult temp = Analytics.CustomEvent("player_died", new Dictionary<string, object>
+            {
+                { "scene_name", SceneManager.GetActiveScene().name },
+                { "time_elapsed", Time.timeSinceLevelLoad }
+            });
+            Debug.Log("player_died event status: " + temp);
+
+            // Load main menu on death
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Bullet collision reaction
+        if (collision.gameObject.layer == 8)
+        {
+            TakeDamage(collision.gameObject.GetComponent<BulletWithSO>().bltDmg);
         }
     }
 }
