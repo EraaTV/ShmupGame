@@ -21,8 +21,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        
-
         //Get Directional Input
         if (Input.GetKey(KeyCode.W))
         {
@@ -52,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        rigidbody.velocity = Vector3.zero;
         //Move the player object in game
         rigidbody.velocity = moveDir * MOVE_SPEED;
 
